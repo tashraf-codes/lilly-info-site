@@ -111,7 +111,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => setTimeout(() => setMenuOpen(false), 0)}
                   className={`rounded-md px-2 py-3 text-base font-medium transition-colors ${
                     isActive(link.href) ? "text-brand" : "text-neutral-700 hover:text-brand"
                   }`}
