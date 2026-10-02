@@ -28,7 +28,7 @@ export default async function MedicinesPage({
         <h1 className="text-4xl font-bold tracking-tight">Medicines</h1>
         <p className="mt-3 max-w-2xl text-neutral-600">
           An overview of selected medicines developed by Lilly, spanning diabetes &amp; obesity,
-          oncology, immunology, neuroscience, and cardiometabolic health.
+          oncology, immunology, neuroscience, cardiometabolic health, and bone health.
         </p>
       </Reveal>
 

@@ -70,7 +70,7 @@ export default async function HomePage() {
             Lilly research and medicines span the following major areas.
           </p>
         </Reveal>
-        <StaggerGroup className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+        <StaggerGroup className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
           {company.therapeuticAreas.map((area) => {
             const Icon = getTherapeuticAreaIcon(area);
             return (

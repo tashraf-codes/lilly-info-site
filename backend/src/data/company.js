@@ -69,7 +69,56 @@ const company = {
     "Oncology",
     "Immunology",
     "Neuroscience",
-    "Cardiometabolic Health"
+    "Cardiometabolic Health",
+    "Bone Health"
+  ],
+  byTheNumbers: [
+    { label: "Employees worldwide", value: "Roughly 43,000", note: "Across research, manufacturing, and commercial operations" },
+    { label: "Countries reached", value: "120+", note: "Medicines distributed across global markets" },
+    { label: "R&D investment", value: "Among the industry's highest", note: "As a share of annual revenue, consistently reinvested into research" },
+    { label: "Manufacturing sites", value: "Multiple, global", note: "Across the United States, Europe, and Asia" }
+  ],
+  locations: [
+    { city: "Indianapolis, Indiana, USA", type: "Global headquarters" },
+    { city: "Research Triangle Park, North Carolina, USA", type: "R&D & manufacturing" },
+    { city: "Kinsale, Ireland", type: "Manufacturing" },
+    { city: "Branchburg, New Jersey, USA", type: "Biotechnology manufacturing" },
+    { city: "Concord, North Carolina, USA", type: "Manufacturing" },
+    { city: "Shanghai, China", type: "Research & regional operations" }
+  ],
+  faqs: [
+    {
+      question: "Is this website operated by Eli Lilly and Company?",
+      answer:
+        "No. This is an independent, informational project built to showcase Lilly's public history and " +
+        "medicine portfolio. It is not affiliated with, endorsed by, or operated by Eli Lilly and Company."
+    },
+    {
+      question: "Can I use this site to decide whether to take a medicine?",
+      answer:
+        "No. Nothing on this site is medical advice. Always speak with a qualified healthcare professional " +
+        "and consult official prescribing information before making any decisions about a medicine."
+    },
+    {
+      question: "Why does Lilly cover so many different therapeutic areas?",
+      answer:
+        "Large pharmaceutical companies typically diversify research across multiple disease areas to spread " +
+        "risk, since most experimental drugs never reach approval, and to apply shared science (like immunology " +
+        "or metabolic research) across related conditions."
+    },
+    {
+      question: "What does \"recombinant DNA technology\" mean, as mentioned for Humulin?",
+      answer:
+        "It means inserting a gene (in this case, the human insulin gene) into another organism, typically " +
+        "bacteria or yeast, so that organism manufactures the protein. Humulin (1982) was one of the first " +
+        "commercial medicines produced this way, rather than extracted from animal tissue."
+    },
+    {
+      question: "How are the medicines on this site chosen?",
+      answer:
+        "They're a curated selection spanning Lilly's major therapeutic areas and different eras of the " +
+        "company's history, illustrating the breadth of its portfolio rather than an exhaustive product list."
+    }
   ],
   disclaimer:
     "This website is an independent, informational project and is not affiliated with, endorsed by, or " +
