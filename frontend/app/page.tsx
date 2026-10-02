@@ -1,79 +1,94 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { getCompany, getMedicines } from "@/lib/api";
+import { getTherapeuticAreaIcon } from "@/lib/icons";
+import HeroContent from "@/components/HeroContent";
+import StatsBand from "@/components/StatsBand";
+import Reveal from "@/components/motion/Reveal";
+import StaggerGroup from "@/components/motion/StaggerGroup";
+import HoverCard from "@/components/motion/HoverCard";
 
 export default async function HomePage() {
   const [company, medicines] = await Promise.all([getCompany(), getMedicines()]);
   const featured = medicines.slice(0, 6);
+  const yearsActive = new Date().getFullYear() - company.founded;
 
   return (
     <div>
-      <section className="border-b border-border bg-muted">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-sm font-semibold uppercase tracking-wide text-brand">
-            {company.founded} &middot; {company.headquarters}
-          </p>
-          <h1 className="mt-3 max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
-            {company.legalName}
-          </h1>
-          <p className="mt-2 text-lg italic text-neutral-500">&ldquo;{company.tagline}&rdquo;</p>
-          <p className="mt-6 max-w-2xl text-neutral-700">{company.summary}</p>
-          <div className="mt-8 flex gap-4">
-            <Link
-              href="/medicines"
-              className="rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-            >
-              Browse Medicines
-            </Link>
-            <Link
-              href="/about"
-              className="rounded-md border border-border px-5 py-3 text-sm font-semibold text-neutral-800 transition-colors hover:border-brand hover:text-brand"
-            >
-              Company History
-            </Link>
-          </div>
+      <section className="relative overflow-hidden border-b border-border bg-muted">
+        <div className="hero-mesh" aria-hidden="true" />
+        <div className="relative mx-auto max-w-6xl px-6 py-20">
+          <HeroContent company={company} />
+        </div>
+      </section>
+
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <StatsBand
+            stats={[
+              { value: yearsActive, suffix: "+", label: "Years of continuous operation" },
+              { value: medicines.length, label: "Medicines featured on this site" },
+              { value: company.therapeuticAreas.length, label: "Therapeutic areas covered" },
+              { value: 1923, label: "First mass-produced insulin" },
+            ]}
+          />
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
-        <h2 className="text-2xl font-bold">Therapeutic Areas</h2>
-        <p className="mt-2 max-w-2xl text-neutral-600">
-          Lilly research and medicines span the following major areas.
-        </p>
-        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-          {company.therapeuticAreas.map((area) => (
-            <div
-              key={area}
-              className="rounded-lg border border-border bg-white p-4 text-center text-sm font-medium text-neutral-800 shadow-sm"
-            >
-              {area}
-            </div>
-          ))}
-        </div>
+        <Reveal>
+          <h2 className="text-2xl font-bold">Therapeutic Areas</h2>
+          <p className="mt-2 max-w-2xl text-neutral-600">
+            Lilly research and medicines span the following major areas.
+          </p>
+        </Reveal>
+        <StaggerGroup className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+          {company.therapeuticAreas.map((area) => {
+            const Icon = getTherapeuticAreaIcon(area);
+            return (
+              <Reveal key={area} as="div">
+                <HoverCard className="h-full rounded-lg border border-border bg-white p-4 text-center shadow-sm transition-shadow hover:shadow-md hover:border-brand/40">
+                  <Icon className="mx-auto h-6 w-6 text-brand" strokeWidth={1.75} />
+                  <p className="mt-3 text-sm font-medium text-neutral-800">{area}</p>
+                </HoverCard>
+              </Reveal>
+            );
+          })}
+        </StaggerGroup>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="flex items-end justify-between">
-          <h2 className="text-2xl font-bold">Featured Medicines</h2>
-          <Link href="/medicines" className="text-sm font-semibold text-brand hover:underline">
-            View all &rarr;
-          </Link>
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((medicine) => (
+        <Reveal>
+          <div className="flex items-end justify-between">
+            <h2 className="text-2xl font-bold">Featured Medicines</h2>
             <Link
-              key={medicine.slug}
-              href={`/medicines/${medicine.slug}`}
-              className="rounded-lg border border-border bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              href="/medicines"
+              className="group flex items-center gap-1 text-sm font-semibold text-brand hover:underline"
             >
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand">
-                {medicine.category}
-              </p>
-              <h3 className="mt-2 text-lg font-bold">{medicine.name}</h3>
-              <p className="text-sm text-neutral-500">{medicine.genericName}</p>
-              <p className="mt-3 text-sm text-neutral-600 line-clamp-3">{medicine.about}</p>
+              View all
+              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </Link>
+          </div>
+        </Reveal>
+        <StaggerGroup className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((medicine) => (
+            <Reveal key={medicine.slug}>
+              <HoverCard className="h-full">
+                <Link
+                  href={`/medicines/${medicine.slug}`}
+                  className="block h-full rounded-lg border border-border bg-white p-6 shadow-sm transition-shadow hover:shadow-md hover:border-brand/40"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wide text-brand">
+                    {medicine.category}
+                  </p>
+                  <h3 className="mt-2 text-lg font-bold">{medicine.name}</h3>
+                  <p className="text-sm text-neutral-500">{medicine.genericName}</p>
+                  <p className="mt-3 text-sm text-neutral-600 line-clamp-3">{medicine.about}</p>
+                </Link>
+              </HoverCard>
+            </Reveal>
           ))}
-        </div>
+        </StaggerGroup>
       </section>
     </div>
   );
