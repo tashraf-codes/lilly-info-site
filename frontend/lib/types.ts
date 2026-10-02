@@ -18,6 +18,8 @@ export interface Company {
   disclaimer: string;
 }
 
+export type MedicineFormType = "pen" | "vial" | "tablet" | "capsule" | "infusion" | "nasal";
+
 export interface Medicine {
   slug: string;
   name: string;
@@ -28,4 +30,5 @@ export interface Medicine {
   about: string;
   usedFor: string[];
   form: string;
+  formType: MedicineFormType;
 }
