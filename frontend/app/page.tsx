@@ -8,7 +8,7 @@ import StatsBand from "@/components/StatsBand";
 import MilestoneSlider from "@/components/MilestoneSlider";
 import Reveal from "@/components/motion/Reveal";
 import StaggerGroup from "@/components/motion/StaggerGroup";
-import HoverCard from "@/components/motion/HoverCard";
+import TiltCard from "@/components/motion/TiltCard";
 
 export default async function HomePage() {
   const [company, medicines] = await Promise.all([getCompany(), getMedicines()]);
@@ -75,10 +75,10 @@ export default async function HomePage() {
             const Icon = getTherapeuticAreaIcon(area);
             return (
               <Reveal key={area} as="div">
-                <HoverCard className="h-full rounded-lg border border-border bg-white p-4 text-center shadow-sm transition-shadow hover:shadow-md hover:border-brand/40">
+                <TiltCard className="h-full rounded-lg border border-border bg-white p-4 text-center shadow-sm transition-shadow hover:shadow-md hover:border-brand/40">
                   <Icon className="mx-auto h-6 w-6 text-brand" strokeWidth={1.75} />
                   <p className="mt-3 text-sm font-medium text-neutral-800">{area}</p>
-                </HoverCard>
+                </TiltCard>
               </Reveal>
             );
           })}
@@ -101,7 +101,7 @@ export default async function HomePage() {
         <StaggerGroup className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((medicine) => (
             <Reveal key={medicine.slug}>
-              <HoverCard className="h-full">
+              <TiltCard className="h-full">
                 <Link
                   href={`/medicines/${medicine.slug}`}
                   className="block h-full rounded-lg border border-border bg-white p-6 shadow-sm transition-shadow hover:shadow-md hover:border-brand/40"
@@ -113,7 +113,7 @@ export default async function HomePage() {
                   <p className="text-sm text-neutral-500">{medicine.genericName}</p>
                   <p className="mt-3 text-sm text-neutral-600 line-clamp-3">{medicine.about}</p>
                 </Link>
-              </HoverCard>
+              </TiltCard>
             </Reveal>
           ))}
         </StaggerGroup>

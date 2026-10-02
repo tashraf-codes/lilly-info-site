@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getMedicines } from "@/lib/api";
 import FilterBar from "@/components/FilterBar";
 import Reveal from "@/components/motion/Reveal";
-import HoverCard from "@/components/motion/HoverCard";
+import TiltCard from "@/components/motion/TiltCard";
 import AnimatedGrid, { AnimatedGridItem } from "@/components/motion/AnimatedGrid";
 
 export const metadata: Metadata = {
@@ -42,7 +42,7 @@ export default async function MedicinesPage({
       >
         {filtered.map((medicine) => (
           <AnimatedGridItem key={medicine.slug}>
-            <HoverCard className="h-full">
+            <TiltCard className="h-full">
               <Link
                 href={`/medicines/${medicine.slug}`}
                 className="block h-full rounded-lg border border-border bg-white p-6 shadow-sm transition-shadow hover:shadow-md hover:border-brand/40"
@@ -54,7 +54,7 @@ export default async function MedicinesPage({
                 <p className="text-sm text-neutral-500">{medicine.genericName}</p>
                 <p className="mt-3 text-sm text-neutral-600 line-clamp-3">{medicine.about}</p>
               </Link>
-            </HoverCard>
+            </TiltCard>
           </AnimatedGridItem>
         ))}
         {filtered.length === 0 && (
