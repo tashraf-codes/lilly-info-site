@@ -79,6 +79,7 @@ export default function Header() {
         <div className="flex items-center gap-1 sm:hidden">
           <button
             type="button"
+            data-mobile-search
             onClick={openCommandPalette}
             aria-label="Search medicines"
             className="rounded-full p-2 text-neutral-600 transition-colors hover:text-brand"
@@ -100,6 +101,7 @@ export default function Header() {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
+            data-mobile-nav
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
